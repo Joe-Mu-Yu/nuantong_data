@@ -1,3 +1,6 @@
-﻿zstandard==0.23.0
+zstandard==0.23.0
 openpyxl==3.1.2
 matplotlib==3.8.3
+numpy==1.26.4
+scipy==1.12.0
+pandas==2.2.1
