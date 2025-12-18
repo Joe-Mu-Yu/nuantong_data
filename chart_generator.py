@@ -40,7 +40,7 @@ class ChartGenerator:
             data (pd.DataFrame, optional): 输入数据，默认为None
         """
         # 设置中文字体支持
-        plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
+        plt.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'DengXian', 'FangSong', 'KaiTi', 'Arial Unicode MS', 'DejaVu Sans', 'sans-serif']
         plt.rcParams['axes.unicode_minus'] = False
         plt.rcParams['font.size'] = 12
         plt.rcParams['axes.titlesize'] = 14
@@ -789,3 +789,4 @@ if __name__ == '__main__':
     
     # 运行单元测试
     unittest.main()
+
