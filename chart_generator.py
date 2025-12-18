@@ -39,26 +39,38 @@ class ChartGenerator:
         Args:
             data (pd.DataFrame, optional): 输入数据，默认为None
         """
-        # 设置中文字体支持，兼容各种环境
-        # 使用matplotlib的字体管理器来查找可用的中文字体
+
         import matplotlib.font_manager as fm
+        import os
+        import matplotlib
         
-        # 首选字体列表，包含常见的中文字体
-        preferred_fonts = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC', 'Arial Unicode MS', 'Microsoft YaHei']
+        # 字体文件路径
+        font_path = 'simhei.ttf'
         
-        # 检查哪些字体可用
-        available_fonts = [font.name for font in fm.fontManager.ttflist]
+        # 检查字体文件是否存在
+        if os.path.exists(font_path):
+            print(f"正在加载字体文件: {font_path}")
+            # 添加下载的字体文件
+            fm.fontManager.addfont(font_path)
+            # 设置Matplotlib使用SimHei字体
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'sans-serif']
+            plt.rcParams['font.family'] = 'SimHei'
+        else:
+            print(f"字体文件 {font_path} 不存在，使用默认字体设置")
+            # 备选方案：动态查找可用的中文字体
+            preferred_fonts = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC', 'Arial Unicode MS', 'Microsoft YaHei']
+            available_fonts = [font.name for font in fm.fontManager.ttflist]
+            
+            selected_font = 'DejaVu Sans'  # 默认回退字体
+            for font in preferred_fonts:
+                if font in available_fonts:
+                    selected_font = font
+                    break
+            
+            plt.rcParams['font.sans-serif'] = [selected_font, 'DejaVu Sans', 'sans-serif']
+            plt.rcParams['font.family'] = 'sans-serif'
         
-        # 选择第一个可用的中文字体
-        selected_font = 'DejaVu Sans'  # 默认回退字体
-        for font in preferred_fonts:
-            if font in available_fonts:
-                selected_font = font
-                break
-        
-        # 设置字体
-        plt.rcParams['font.sans-serif'] = [selected_font, 'DejaVu Sans', 'sans-serif']
-        plt.rcParams['font.family'] = 'sans-serif'
+        # 确保负号正常显示
         plt.rcParams['axes.unicode_minus'] = False
         
         # 字体大小设置
