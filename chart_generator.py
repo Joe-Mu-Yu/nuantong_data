@@ -43,7 +43,7 @@ class ChartGenerator:
         plt.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'DengXian', 'FangSong', 'KaiTi', 'Arial Unicode MS', 'DejaVu Sans', 'sans-serif']
         plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'WenQuanYi Micro Hei', 'Heiti TC', 'Arial Unicode MS', 'sans-serif']
         plt.rcParams['axes.unicode_minus'] = False
-        plt.rcParams['axes.unicode_minus'] = False
+        plt.rcParams['font.family'] = ['sans-serif']
         plt.rcParams['font.size'] = 12
         plt.rcParams['axes.titlesize'] = 14
         plt.rcParams['axes.labelsize'] = 12
@@ -791,5 +791,6 @@ if __name__ == '__main__':
     
     # 运行单元测试
     unittest.main()
+
 
 
