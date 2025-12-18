@@ -39,11 +39,29 @@ class ChartGenerator:
         Args:
             data (pd.DataFrame, optional): 输入数据，默认为None
         """
-        # 设置中文字体支持
-        plt.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'DengXian', 'FangSong', 'KaiTi', 'Arial Unicode MS', 'DejaVu Sans', 'sans-serif']
-        plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'WenQuanYi Micro Hei', 'Heiti TC', 'Arial Unicode MS', 'sans-serif']
+        # 设置中文字体支持，兼容各种环境
+        # 使用matplotlib的字体管理器来查找可用的中文字体
+        import matplotlib.font_manager as fm
+        
+        # 首选字体列表，包含常见的中文字体
+        preferred_fonts = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC', 'Arial Unicode MS', 'Microsoft YaHei']
+        
+        # 检查哪些字体可用
+        available_fonts = [font.name for font in fm.fontManager.ttflist]
+        
+        # 选择第一个可用的中文字体
+        selected_font = 'DejaVu Sans'  # 默认回退字体
+        for font in preferred_fonts:
+            if font in available_fonts:
+                selected_font = font
+                break
+        
+        # 设置字体
+        plt.rcParams['font.sans-serif'] = [selected_font, 'DejaVu Sans', 'sans-serif']
+        plt.rcParams['font.family'] = 'sans-serif'
         plt.rcParams['axes.unicode_minus'] = False
-        plt.rcParams['font.family'] = ['sans-serif']
+        
+        # 字体大小设置
         plt.rcParams['font.size'] = 12
         plt.rcParams['axes.titlesize'] = 14
         plt.rcParams['axes.labelsize'] = 12
@@ -791,6 +809,3 @@ if __name__ == '__main__':
     
     # 运行单元测试
     unittest.main()
-
-
-
